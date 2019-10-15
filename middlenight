@@ -165,6 +165,7 @@ main: 		lui $7, 0x1001
 		addi $11, $0, 4
 		jal quadrado
 		
+		
 #entradas
 #7 --> 16 - endereço
 #9 --> 17 - cor
@@ -302,7 +303,78 @@ subirBola:
 naoLimpar:	addi $7, $7, -256
 		beq $7, $6, nextStep
 		j subirBola
-nextStep:		
+nextStep:	
+		lui $7, 0xffff
+verifi:		lw $4, 4($7)
+		beq $4, 97, tortaoEsquerdo
+		beq $4, 100, tortaoDireito
+		j nextStep
+tortaoEsquerdo: 
+		lui $7, 0x1001
+      		addi $7, $7, 30548
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 5
+		addi $11, $0, 3
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30568
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
+		
+		lui $7, 0x1001
+      		addi $7, $7, 29256
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 5
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 28488
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
+		
+		addi $4, $0, 0
+		
+		j nextStep
+		
+tortaoDireito:
+		lui $7, 0x1001
+      		addi $7, $7, 30612
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 5
+		addi $11, $0, 3
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30608
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaD
+		
+		lui $7, 0x1001
+      		addi $7, $7, 29352
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 5
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 28592
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaD
+		
+		addi $4, $0, 0
+
+		j nextStep
+		
       		addi $2, $0, 10
       		syscall
       
