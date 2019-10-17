@@ -281,7 +281,8 @@ main: 		lui $7, 0x1001
 		addi $10, $0, 3
 		addi $11, $0, 3
 		jal abaE
-		
+
+moveBall:		
 		lui $7, 0x1001
       		addi $7, $7, 31980
       		lui $6, 0x1001
@@ -314,7 +315,9 @@ nextStep:
 verifi:		lw $4, 4($7)
 		beq $4, 97, tortaoEsquerdo
 		beq $4, 100, tortaoDireito
-		j nextStep
+		
+		j moveBall
+		
 tortaoEsquerdo: 
 		lui $7, 0x1001
       		addi $7, $7, 30548
@@ -343,42 +346,38 @@ tortaoEsquerdo:
 		addi $10, $0, 3
 		addi $11, $0, 3
 		jal abaE
-		addi $4, $0, 0
-		
-		addi $2, $0, 32
-		addi $4, $0, 1000
-		syscall
-		
+		#----------------#
 		lui $7, 0x1001
-      		addi $7, $7, 30548
+      		addi $7, $7, 30612
       		addi $9, $0, 0x00ffffff #0x00ff0000                    
 		addi $10, $0, 5
 		addi $11, $0, 3
 		jal quadrado
 		
 		lui $7, 0x1001
-      		addi $7, $7, 30568
+      		addi $7, $7, 30608
       		addi $9, $0, 0x00ffffff #0x00ff0000                    
 		addi $10, $0, 3
 		addi $11, $0, 3
-		jal abaE
+		jal abaD
 		
 		lui $7, 0x1001
-      		addi $7, $7, 29256
+      		addi $7, $7, 29352
       		addi $9, $0, 0x00000000 #0x00ff0000                    
 		addi $10, $0, 3
 		addi $11, $0, 5
 		jal quadrado
 		
 		lui $7, 0x1001
-      		addi $7, $7, 28488
+      		addi $7, $7, 28592
       		addi $9, $0, 0x00000000 #0x00ff0000                    
 		addi $10, $0, 3
 		addi $11, $0, 3
-		jal abaE
+		jal abaD
+		
 		addi $4, $0, 0
 		
-		j nextStep
+		j moveBall
 		
 tortaoDireito:
 		lui $7, 0x1001
@@ -409,9 +408,40 @@ tortaoDireito:
 		addi $11, $0, 3
 		jal abaD
 		
+		#-----------------#
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30548
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 5
+		addi $11, $0, 3
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30568
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
+		
+		lui $7, 0x1001
+      		addi $7, $7, 29256
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 5
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 28488
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
+		
+		
 		addi $4, $0, 0
 
-		j nextStep
+		j moveBall
 		
       		addi $2, $0, 10
       		syscall
