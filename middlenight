@@ -288,21 +288,27 @@ main: 		lui $7, 0x1001
       		addi $6, $6, 748
       		lui $5, 0x1001
 		addi $5, $5, 32236
-		lui $4, 0x1001
-		addi $4, $4, 1260
-subirBola:
+		lui $3, 0x1001
+		addi $3, $3, 1260
+		
+subirBola:	
       		addi $9, $0, 0x00ffffff #0x00ff0000
 		addi $10, $0, 2
 		addi $11, $0, 2
 		jal quadrado
-		beq $5, $4, naoLimpar
+		addi $2, $0, 32
+		addi $4, $0, 10
+		syscall
+		beq $5, $3, naoLimpar
 		addi $9, $0, 0x00000000 #0x00ff0000
 		addi $10, $0, 2
 		jal limparBaixo
+
 		addi $5, $5, -256
 naoLimpar:	addi $7, $7, -256
 		beq $7, $6, nextStep
 		j subirBola
+		addi $12, $0, 1
 nextStep:	
 		lui $7, 0xffff
 verifi:		lw $4, 4($7)
@@ -337,7 +343,39 @@ tortaoEsquerdo:
 		addi $10, $0, 3
 		addi $11, $0, 3
 		jal abaE
+		addi $4, $0, 0
 		
+		addi $2, $0, 32
+		addi $4, $0, 1000
+		syscall
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30548
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 5
+		addi $11, $0, 3
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 30568
+      		addi $9, $0, 0x00ffffff #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
+		
+		lui $7, 0x1001
+      		addi $7, $7, 29256
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 5
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 28488
+      		addi $9, $0, 0x00000000 #0x00ff0000                    
+		addi $10, $0, 3
+		addi $11, $0, 3
+		jal abaE
 		addi $4, $0, 0
 		
 		j nextStep
