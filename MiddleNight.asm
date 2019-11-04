@@ -374,6 +374,70 @@ tortaoEsquerdo:
 		addi $10, $0, 3
 		addi $11, $0, 3
 		jal abaD
+#--------------------------------------------------------------------------------------------------------------#
+		
+		lui $7, 0x1001
+      		addi $7, $7, 2340
+      		addi $9, $0, 0x000000ff #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 2476
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 8036
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 14816
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal abaD
+		
+		lui $7, 0x1001
+      		addi $7, $7, 14604
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal abaE
+		
+		lui $7, 0x1001
+      		addi $7, $7, 17772
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 2
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 20084
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 23360
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 23464
+      		addi $9, $0, 0x000000ff #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
 		
 		addi $4, $0, 0
 		
@@ -437,7 +501,70 @@ tortaoDireito:
 		addi $10, $0, 3
 		addi $11, $0, 3
 		jal abaE
+#-------------------------------------------------------------------------------------#
 		
+		lui $7, 0x1001
+      		addi $7, $7, 2340
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 2476
+      		addi $9, $0, 0x000000ff #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 8036
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 14816
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal abaD
+		
+		lui $7, 0x1001
+      		addi $7, $7, 14604
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 8
+		jal abaE
+		
+		lui $7, 0x1001
+      		addi $7, $7, 17772
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 8
+		addi $11, $0, 2
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 20084
+      		addi $9, $0, 0x00ff0000 #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 23360
+      		addi $9, $0, 0x000000ff #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
+		
+		lui $7, 0x1001
+      		addi $7, $7, 23464
+      		addi $9, $0, 0x0000ff00 #0x00ff0000                    
+		addi $10, $0, 4
+		addi $11, $0, 4
+		jal quadrado
 		
 		addi $4, $0, 0
 
