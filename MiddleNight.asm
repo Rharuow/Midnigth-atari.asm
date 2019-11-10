@@ -309,12 +309,45 @@ naoLimpar:	addi $7, $7, -256
 		beq $7, $6, nextStep
 		j subirBola
 		
-
+		lui $5, 0x1001
+		addi $5, $5, 1008
+		lui $3, 0x1001
+		addi $3, $3, 776
+		addi $14, $0, 123
 nextStep:		
 		lui $7, 0xffff
 		lw $4, 4($7)
 		beq $4, 97, tortaoEsquerdo
 		beq $4, 100, tortaoDireito
+		
+forColisao:	beq $5, $3, exitBolaE
+#		addi $3, $3, 256
+#		addi $14, $14, -1
+#		beq $14, $0, sairColisao
+		j forColisao
+		#Limpar
+		addi $2, $0, 32
+		addi $4, $0, 50
+		syscall
+sairColisao:	add $7, $0, $5
+      		addi $9, $0, 0x00000000                    
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		addi $2, $0, 32
+		addi $4, $0, 90
+		syscall
+		addi $5, $5, -4
+		add $7, $0, $5
+      		addi $9, $0, 0x00ffffff                    
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		addi $2, $0, 32
+		addi $4, $0, 50
+		syscall
+		
+exitBolaE:	
 		
 		j nextStep
 		
@@ -578,7 +611,6 @@ tortaoDireito:
       
 #--------------------------------------------------------------------------------#
 #					FUNCTIONS
-#--------------------------------------------------------------------------------#
 #--------------------------------------------------------------------------------#
 #entradas
 #5 --> 16 - endereço
