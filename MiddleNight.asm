@@ -311,19 +311,18 @@ naoLimpar:	addi $7, $7, -256
 prepara:		
 		lui $5, 0x1001
 		addi $5, $5, 1004
-		lw $3, 0($5)
-nextStep:	
-		lui $7, 0xffff
-		lw $4, 4($7)
-		beq $4, 97, tortaoEsquerdo
-		beq $4, 100, tortaoDireito
-		
-		beq $3, 0x00ff00ff, nextStep
+nextStep:#Aqui	
+		lui $13, 0x1001
+		addi $13, $13, 780
+		li $14, 123
+forColEsq:	beq $13, $5, colidiuEsquerda
+		addi $13, $13, 252
+		addi $14, $14, -1
+		beq $14, 0, sairColisao
+		j forColEsq
 		#Limpar
-		addi $2, $0, 32
-		addi $4, $0, 10
-		syscall
-sairColisao:	add $7, $0, $5
+sairColisao:	
+		add $7, $0, $5
       		addi $9, $0, 0x00000000                    
 		addi $10, $0, 2
 		addi $11, $0, 2
@@ -340,10 +339,12 @@ sairColisao:	add $7, $0, $5
 		addi $2, $0, 32
 		addi $4, $0, 50
 		syscall
-		
-exitBolaE:	
-		
-		j nextStep
+	
+		li $4, 0
+		lui $7, 0xffff
+		lw $4, 4($7)
+		beq $4, 97, tortaoEsquerdo
+		beq $4, 100, tortaoDireito
 		
 tortaoEsquerdo: 
 		lui $7, 0x1001
@@ -466,7 +467,8 @@ tortaoEsquerdo:
 		addi $11, $0, 4
 		jal quadrado
 		
-		addi $4, $0, 0
+		add $4, $0, $0
+		add $7, $0, $0
 		
 		j nextStep
 		
@@ -593,10 +595,11 @@ tortaoDireito:
 		addi $11, $0, 4
 		jal quadrado
 		
-		addi $4, $0, 0
+		add $4, $0, $0
+		add $7, $0, $0
 
 		j nextStep
-		
+colidiuEsquerda:		
       		addi $2, $0, 10
       		syscall
       
