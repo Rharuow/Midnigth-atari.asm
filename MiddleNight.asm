@@ -311,34 +311,17 @@ naoLimpar:	addi $7, $7, -256
 prepara:		
 		lui $5, 0x1001
 		addi $5, $5, 1004
+		addi $15, $0, 0x00ff00ff
 nextStep:#Aqui	
-		lui $13, 0x1001
-		addi $13, $13, 780
-		li $14, 123
-forColEsq:	beq $13, $5, colidiuEsquerda
-		addi $13, $13, 252
-		addi $14, $14, -1
-		beq $14, 0, sairColisao
-		j forColEsq
-		#Limpar
-sairColisao:	
-		add $7, $0, $5
-      		addi $9, $0, 0x00000000                    
-		addi $10, $0, 2
-		addi $11, $0, 2
-		jal quadrado
-		addi $2, $0, 32
-		addi $4, $0, 90
-		syscall
-		addi $5, $5, -4
-		add $7, $0, $5
-      		addi $9, $0, 0x00ffffff                    
-		addi $10, $0, 2
-		addi $11, $0, 2
-		jal quadrado
-		addi $2, $0, 32
-		addi $4, $0, 50
-		syscall
+		lw $15, -4($5)
+		lw $15, -252($5)
+		lw $15, 8($5)
+		lw $15, -248($5)
+		lw $15, 516($5)
+		lw $15, 268($5)
+		beq $15, 0x00ff00ff, deuCerto
+bateu:		
+
 	
 		li $4, 0
 		lui $7, 0xffff
@@ -599,7 +582,7 @@ tortaoDireito:
 		add $7, $0, $0
 
 		j nextStep
-colidiuEsquerda:		
+deuCerto:		
       		addi $2, $0, 10
       		syscall
       
