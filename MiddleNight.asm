@@ -312,17 +312,50 @@ prepara:
 		lui $5, 0x1001
 		addi $5, $5, 1004
 		addi $15, $0, 0x00ff00ff
-nextStep:#Aqui	
+		
 		lw $15, -4($5)
-		lw $15, -252($5)
-		lw $15, 8($5)
+		beq $15, 0x00ff00ff, bateuFrente
+		lw $15, -260($5)
+		beq $15, 0x00ff00ff, bateuDiagonal1
 		lw $15, -248($5)
+		beq $15, 0x00ff00ff, bateuDiagonal2
+		lw $15, -512($5)
+		beq $15, 0x00ff00ff, bateuDiagonal3
+		lw $15, -520($5)
+		beq $15, 0x00ff00ff, bateuDiagonal4
+		lw $15, -256($5)
+		beq $15, 0x00ff00ff, bateuCima
+		lw $15, 8($5)
+		beq $15, 0x00ff00ff, bateuAtras
+		lw $15, -252($5)
+		beq $15, 0x00ff00ff, bateuFrente
+		lw $15, 512($5)
+		beq $15, 0x00ff00ff, bateuBaixo
 		lw $15, 516($5)
-		lw $15, 268($5)
-		beq $15, 0x00ff00ff, deuCerto
-bateu:		
+		beq $15, 0x00ff00ff, bateuBaixo
+		lw $15, 264($5)
+		beq $15, 0x00ff00ff, bateuAtras
+		
+nextStep:#Aqui	
+		beq $16, 0, naoBateu
+		
+bateuFrente:	li $16, 1
 
-	
+bateuDiagonal1: li $16, 2
+
+bateuCima:	li $16, 3
+
+bateuDiagonal2: li $16, 4
+
+bateuBaixo:	li $16, 5
+
+bateuDiagonal3: li $16, 6
+
+bateuAtras:	li $16, 7		
+
+bateuDiagonal4: li $16, 8
+
+naoBateu:
 		li $4, 0
 		lui $7, 0xffff
 		lw $4, 4($7)
