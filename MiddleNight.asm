@@ -330,12 +330,62 @@ prepara:
 		addi $4, $0, 20
 		syscall
 		
-		j segueACaminhada
+		add $7, $0, $5
+		addi $9, $0, 0x00000000
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $5, $5, 1016
+		
+		add $7, $0, $5
+		addi $9, $0, 0x00ffffff
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $2, $0, 32
+		addi $4, $0, 20
+		syscall
 		
 nextStep:#Aqui	
 moverDiagonal1:
+
+		lw $15, -256($5)
+		beq $15, 0x00ff00ff, moverParaBaixo
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
+		
+		lw $15, -252($5)
+		beq $15, 0x00ff00ff, moverParaBaixo
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
+		
+		lw $15, 252($5)
+		beq $15, 0x00ff00ff, moverDiagonal2
+		beq $15, 0x000000ff, moverDiagonal2
+		beq $15, 0x00ff0000, moverDiagonal2
+		beq $15, 0x0000ff00, moverDiagonal2
+		
+		lw $15, -4($5)
+		beq $15, 0x00ff00ff, moverParaDireita
+		beq $15, 0x000000ff, moverParaDireita
+		beq $15, 0x00ff0000, moverParaDireita
+		beq $15, 0x0000ff00, moverParaDireita
+		
+		lw $15, 508($5)
+		beq $15, 0x00ff00ff, moverDiagonal2
+		beq $15, 0x000000ff, moverDiagonal2
+		beq $15, 0x00ff0000, moverDiagonal2
+		beq $15, 0x0000ff00, moverDiagonal2
+		
 		lw $15, -260($5)
 		beq $15, 0x00ff00ff, moverDiagonal4
+		beq $15, 0x000000ff, moverDiagonal4
+		beq $15, 0x00ff0000, moverDiagonal4
+		beq $15, 0x0000ff00, moverDiagonal4
 		
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -352,15 +402,46 @@ moverDiagonal1:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
-
+		add $7, $0, $5
+		addi $9, $0, 0x00000000
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $5, $5, -260
+		
+		add $7, $0, $5
+		addi $9, $0, 0x00ffffff
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $2, $0, 32
+		addi $4, $0, 300
+		syscall
+		
+		j moverDiagonal1
 		
 moverDiagonal4:
+		lw $15, 512($5)
+		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
+		lw $15, 516($5)
+		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
+
 		lw $15, 520($5)
 		beq $15, 0x00ff00ff, moverDiagonal1
+		beq $15, 0x000000ff, moverDiagonal1
+		beq $15, 0x00ff0000, moverDiagonal1
+		beq $15, 0x0000ff00, moverDiagonal1
 
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -377,16 +458,36 @@ moverDiagonal4:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
+		j moverDiagonal4
 		
 moverParaBaixo:
+		
+		lw $15, 508($5)
+		beq $15, 0x00ff00ff, moverDiagonal2
+		beq $15, 0x000000ff, moverDiagonal2
+		beq $15, 0x00ff0000, moverDiagonal2
+		beq $15, 0x0000ff00, moverDiagonal2
+
+		lw $15, 520($5)
+		beq $15, 0x00ff00ff, moverDiagonal1
+		beq $15, 0x000000ff, moverDiagonal1
+		beq $15, 0x00ff0000, moverDiagonal1
+		beq $15, 0x0000ff00, moverDiagonal1
+		
 		lw $15, 512($5)
 		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
+		
 		lw $15, 516($5)
 		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
 
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -403,14 +504,29 @@ moverParaBaixo:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
+		j moverParaBaixo
+		
 		
 moverDiagonal3:
+		lw $15, 512($5)
+		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
+		lw $15, 516($5)
+		beq $15, 0x00ff00ff, moverParaCima
+		beq $15, 0x000000ff, moverParaCima
+		beq $15, 0x00ff0000, moverParaCima
+		beq $15, 0x0000ff00, moverParaCima
+
 		lw $15, 508($5)
 		beq $15, 0x00ff00ff, moverDiagonal2
+		beq $15, 0x000000ff, moverDiagonal2
+		beq $15, 0x00ff0000, moverDiagonal2
+		beq $15, 0x0000ff00, moverDiagonal2
 
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -427,16 +543,36 @@ moverDiagonal3:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
+		j moverDiagonal3
 		
 moverParaCima:
-		lw $15, 512($5)
+
+		lw $15, -260($5)
+		beq $15, 0x00ff00ff, moverDiagonal4
+		beq $15, 0x000000ff, moverDiagonal4
+		beq $15, 0x00ff0000, moverDiagonal4
+		beq $15, 0x0000ff00, moverDiagonal4
+		
+		lw $15, -248($5)
+		beq $15, 0x00ff00ff, moverDiagonal3
+		beq $15, 0x000000ff, moverDiagonal3
+		beq $15, 0x00ff0000, moverDiagonal3
+		beq $15, 0x0000ff00, moverDiagonal3
+
+		lw $15, -256($5)
 		beq $15, 0x00ff00ff, moverParaBaixo
-		lw $15, 516($5)
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
+		
+		lw $15, -252($5)
 		beq $15, 0x00ff00ff, moverParaBaixo
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
 
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -453,15 +589,41 @@ moverParaCima:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
+		j moverParaCima
 		
 moverDiagonal2:
+		lw $15, -256($5)
+		beq $15, 0x00ff00ff, moverParaBaixo
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
+		
+		lw $15, -252($5)
+		beq $15, 0x00ff00ff, moverParaBaixo
+		beq $15, 0x000000ff, moverParaBaixo
+		beq $15, 0x00ff0000, moverParaBaixo
+		beq $15, 0x0000ff00, moverParaBaixo
+		
+		lw $15, 8($5)
+		beq $15, 0x00ff00ff, moverParaDireita
+		beq $15, 0x000000ff, moverParaDireita
+		beq $15, 0x00ff0000, moverParaDireita
+		beq $15, 0x0000ff00, moverParaDireita
+		
+		lw $15, 264($5)
+		beq $15, 0x00ff00ff, moverParaDireita
+		beq $15, 0x000000ff, moverParaDireita
+		beq $15, 0x00ff0000, moverParaDireita
+		beq $15, 0x0000ff00, moverParaDireita
 		
 		lw $15, -248($5)
 		beq $15, 0x00ff00ff, moverDiagonal3
+		beq $15, 0x000000ff, moverDiagonal3
+		beq $15, 0x00ff0000, moverDiagonal3
+		beq $15, 0x0000ff00, moverDiagonal3
 
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
@@ -478,17 +640,61 @@ moverDiagonal2:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
+		j moverDiagonal2
 		
-moverParaTras:
+moverParaDireita:
+		lw $15, 520($5)
+		beq $15, 0x00ff00ff, moverDiagonal1
+		beq $15, 0x000000ff, moverDiagonal1
+		beq $15, 0x00ff0000, moverDiagonal1
+		beq $15, 0x0000ff00, moverDiagonal1
+
 		lw $15, 8($5)
-		beq $15, 0x00ff00ff, moverParaFrente
+		beq $15, 0x00ff00ff, moverParaEsquerda
+		beq $15, 0x000000ff, moverParaEsquerda
+		beq $15, 0x00ff0000, moverParaEsquerda
+		beq $15, 0x0000ff00, moverParaEsquerda
 		lw $15, 264($5)
-		beq $15, 0x00ff00ff, moverParaFrente
+		beq $15, 0x00ff00ff, moverParaEsquerda
+		beq $15, 0x000000ff, moverParaEsquerda
+		beq $15, 0x00ff0000, moverParaEsquerda
+		beq $15, 0x0000ff00, moverParaEsquerda
 		
+		add $7, $0, $5
+		addi $9, $0, 0x00000000
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $5, $5, 8
+		
+		add $7, $0, $5
+		addi $9, $0, 0x00ffffff
+		addi $10, $0, 2
+		addi $11, $0, 2
+		jal quadrado
+		
+		addi $2, $0, 32
+		addi $4, $0, 300
+		syscall
+		
+		j moverParaDireita
+		
+moverParaEsquerda:
+		lw $15, -4($5)
+		beq $15, 0x00ff00ff, moverParaDireita
+		beq $15, 0x000000ff, moverParaDireita
+		beq $15, 0x00ff0000, moverParaDireita
+		beq $15, 0x0000ff00, moverParaDireita
+		lw $15, 252($5)
+		beq $15, 0x00ff00ff, moverParaDireita
+		beq $15, 0x000000ff, moverParaDireita
+		beq $15, 0x00ff0000, moverParaDireita
+		beq $15, 0x0000ff00, moverParaDireita
+
 		add $7, $0, $5
 		addi $9, $0, 0x00000000
 		addi $10, $0, 2
@@ -504,64 +710,37 @@ moverParaTras:
 		jal quadrado
 		
 		addi $2, $0, 32
-		addi $4, $0, 20
+		addi $4, $0, 300
 		syscall
 		
-		j segueACaminhada
-		
-moverParaFrente:
-		lw $15, -4($5)
-		beq $15, 0x00ff00ff, moverParaTras
-		lw $15, 252($5)
-		beq $15, 0x00ff00ff, moverParaTras
-
-		add $7, $0, $5
-		addi $9, $0, 0x00000000
-		addi $10, $0, 2
-		addi $11, $0, 2
-		jal quadrado
-		
-		addi $5, $5, -248
-		
-		add $7, $0, $5
-		addi $9, $0, 0x00ffffff
-		addi $10, $0, 2
-		addi $11, $0, 2
-		jal quadrado
-		
-		addi $2, $0, 32
-		addi $4, $0, 20
-		syscall
-		
-		j segueACaminhada
-
+		j moverParaEsquerda
 
 segueACaminhada:
 
-		lw $15, -260($5)
-		beq $15, 0x00ff00ff, moverDiagonal2
-		lw $15, -248($5)
-		beq $15, 0x00ff00ff, moverDiagonal4
-		lw $15, 508($5)
-		beq $15, 0x00ff00ff, moverDiagonal1
-		lw $15, 520($5)
-		beq $15, 0x00ff00ff, moverDiagonal3
-		lw $15, -4($5)
-		beq $15, 0x00ff00ff, moverParaTras
-		lw $15, 252($5)
-		beq $15, 0x00ff00ff, moverParaTras
-		lw $15, -256($5)
-		beq $15, 0x00ff00ff, moverParaBaixo
-		lw $15, -252($5)
-		beq $15, 0x00ff00ff, moverParaBaixo
-		lw $15, 8($5)
-		beq $15, 0x00ff00ff, moverParaFrente
-		lw $15, 264($5)
-		beq $15, 0x00ff00ff, moverParaFrente
-		lw $15, 512($5)
-		beq $15, 0x00ff00ff, moverParaCima
-		lw $15, 516($5)
-		beq $15, 0x00ff00ff, moverParaCima
+		#lw $15, -260($5)
+		#beq $15, 0x00ff00ff, moverDiagonal4
+		#lw $15, -248($5)
+		#beq $15, 0x00ff00ff, moverDiagonal3
+		#lw $15, 508($5)
+		#beq $15, 0x00ff00ff, moverDiagonal2
+		#lw $15, 520($5)
+		#beq $15, 0x00ff00ff, moverDiagonal1
+		#lw $15, -4($5)
+		#beq $15, 0x00ff00ff, moverParaDireita
+		#lw $15, 252($5)
+		#beq $15, 0x00ff00ff, moverParaDireita
+		#lw $15, -256($5)
+		#beq $15, 0x00ff00ff, moverParaBaixo
+		#lw $15, -252($5)
+		#beq $15, 0x00ff00ff, moverParaBaixo
+		#lw $15, 8($5)
+		#beq $15, 0x00ff00ff, moverParaEsquerda
+		#lw $15, 264($5)
+		#beq $15, 0x00ff00ff, moverParaEsquerda
+		#lw $15, 512($5)
+		#beq $15, 0x00ff00ff, moverParaCima
+		#lw $15, 516($5)
+		#beq $15, 0x00ff00ff, moverParaCima
 		
 		#lw $15, -260($5)
 		#beq $15, 0x00ff00ff, bateuDiagonal1
@@ -593,6 +772,8 @@ segueACaminhada:
 		lw $4, 4($7)
 		beq $4, 97, tortaoEsquerdo
 		beq $4, 100, tortaoDireito
+		
+		j nextStep
 		
 tortaoEsquerdo: 
 		lui $7, 0x1001
